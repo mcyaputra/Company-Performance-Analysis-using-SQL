@@ -4,4 +4,5 @@ We are evaluating the performance of a specialty food company called Northwind T
 Northwind shared their company’s data to us which consists of 13 tables:
 
 | No | Table_Name | # of Rows | Description |
-|1| Categories | 8 |
+| 1  | Categories | 8         |             |
+
