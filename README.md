@@ -8,3 +8,4 @@
 | --- | ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | 1   | Categories | 8         | List of Category ID and names along with detailed description                                                            |
 | 2   | Customers  | 91        | Comprehensive list of Northwind Trader's customers, from customer IDs, company names, addresses and contacts information |
+| 3   | Employees  | 9         | List of Northwind Trader's employees: Names, birthdays, hire dates, contact information and addresses                    |
