@@ -22,8 +22,8 @@
 ## Table of Content
 
 ## Relationship Diagram:
-
-<img width=60% height=60%" src="/images/Relationship_Diagram.png">
+<p align="center">
+    <img width=60% height=60%" src="/images/Relationship_Diagram.png">
 
 
 ## Analysis
