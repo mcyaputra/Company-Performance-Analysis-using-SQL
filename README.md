@@ -11,3 +11,10 @@
 | 3   | Employees            | 9         | List of Northwind Trader's employees: Names, birthdays, hire dates, contact information and addresses                    |
 | 4   | Employee Territories | 49        | List of territory ID and related employee                                                                                |
 | 5   | order_details        | 2,155     | List of products sold, from order IDs, product IDs, prices, quantity sold and discounts                                  |
+| 6 | orders |  830 | Customer and shipping details per order, from order IDs, customer IDs, order dates, shipped dates to shipping addresses
+| 7 | products | 7 | list of present and past products |
+| 8 | region | 4 | Region descriptions and their IDs |
+| 9 | shippers | 6 | Shipping companies's names, IDs and contact information |
+|10 | suppliers | 29 | detailed list of suppliers, from supplier IDs, company names, addresses, contact information |
+| 11 | territories | 53 | list of territory IDs, region IDs and their description |
+| 12 | usstates | 51 | list of US states, assigned IDs, state abbreviation and region |
