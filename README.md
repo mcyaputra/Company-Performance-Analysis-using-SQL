@@ -27,3 +27,20 @@
 
 
 ## Analysis
+1. For their annual review of the company pricing strategy, the Product Team wants to look at the products that are currently being offered for a specific price range ($10 to $50). In order to help them they asked you to provide them with a list of products with the following information:
+
+A. their name
+B. their unit price
+
+Filtered on the following conditions:
+
+A. their unit price is between 10 and 50 (greater or equal to 10 but less or equal than 50)
+B. they are not discontinued
+
+Finally order the results by product name in alphabetical order.
+
+<details>
+<summary>
+Query
+</summary>
+
