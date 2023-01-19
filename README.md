@@ -18,3 +18,12 @@
 |10 | suppliers | 29 | detailed list of suppliers, from supplier IDs, company names, addresses, contact information |
 | 11 | territories | 53 | list of territory IDs, region IDs and their description |
 | 12 | usstates | 51 | list of US states, assigned IDs, state abbreviation and region |
+
+## Table of Content
+
+## Relationship Diagram:
+
+<img width=60% height=60%" src="/images/Relationship_Diagram">
+
+
+## Analysis
