@@ -23,7 +23,7 @@
 
 ## Relationship Diagram:
 <p align="center">
-    <img width=60% height=60%" src="/images/Relationship_Diagram.png">
+    <img width=60% height=60%" src="/Images/Relationship_Diagram.png">
 
 
 ## Analysis
