@@ -2,7 +2,7 @@
 
 # Company Analysis (Northwind)
 
->We are taking this opportunity to analyze Northwind Traders, importer and exporter of specialty food from and to around the world. We will be performing analysis on the company's performance utilizing their sales [datasets](/Northwind_Dataset.sql).
+>Analyzing Northwind Traders, importer and exporter of specialty food from and to around the world. We will be performing analysis on the company's performance utilizing their sales [datasets](/Northwind_Dataset.sql).
 
 | No  |      Table_Name      | # of Rows |                                                       Description                                                        |
 | --- | -------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -41,7 +41,7 @@ B. Products are not discontinued
 
 <details>
 <summary>
-**:chart_with_upwards_trend: Query**
+:chart_with_upwards_trend: Query
 </summary>
 
 ```SQL
@@ -152,7 +152,7 @@ AND total_volume_orders > 5
 ORDER BY 2 DESC
 ```
 
-Result:
+**Result:**
 
 | shipping_country | average_days_between_order_shipping | total_volume_orders |
 | ---------------- | ----------------------------------- | ------------------- |
@@ -214,7 +214,7 @@ LEFT JOIN employees e ON e.employee_id = n.reports_to
 ORDER BY employee_age ASC, employee_full_name ASC;
 ```
 
-Result:
+**Result:**
 
 | employee_full_name |      employee_title      | employee_age | employee_tenure | manager_full_name |     manager_title     |
 | ------------------ | ------------------------ | ------------ | --------------- | ----------------- | --------------------- |
@@ -265,7 +265,7 @@ AND total_freight > 2500
 ORDER BY total_freight DESC
 ```
 
-Result:
+**Result:**
 
 | year_month | total_number_orders | total_freight |
 | ---------- | ------------------- | ------------- |
@@ -315,7 +315,7 @@ WHERE ROUND(CAST(((current_price/previous_unit_price)-1)*100 AS numeric), 4) NOT
 ORDER BY percentage_increase ASC
 ```
 
-Result:
+**Result:**
 
 | product_name                  | current_price | previous_unit_price | percentage_increase |
 | Singaporean Hokkien Fried Mee | 14.00         | 9.80                | 42.8571             |
@@ -370,7 +370,7 @@ GROUP BY category_name, price_range
 ORDER BY category_name ASC, price_range ASC
 ```
 
-Result:
+**Result:**
 
 | category_name  | price_range  | total_amount | total_number_orders |
 | -------------- | ------------ | ------------ | ------------------- |
@@ -409,7 +409,7 @@ Result:
 
 ### :arrow_forward: Analysis 7
 
-Analyzing the current stock level of the company's regional suppliers for each product category, table will consists:
+Analyzing the current stock level of the company's regional suppliers for each product category, table consists of:
 
 A. Category name
 B. Supplier region” as: 
@@ -444,7 +444,7 @@ GROUP BY category_name, supplier_region
 ORDER BY supplier_region ASC, category_name ASC, reorder_level ASC
 ```
 
-Result:
+**Result:**
 
 | category_name  | supplier_region | units_in_stock | units_on_order | reorder_level |
 | -------------- | --------------- | -------------- | -------------- | ------------- |
@@ -479,7 +479,7 @@ Result:
 </details>
 
 ### :arrow_forward: Analysis 8
-Comparing current product pricing to their respective categories average and median unit price. Table will consists:
+Comparing current product pricing to their respective categories average and median unit price. Table consists of:
 
 A. Category name
 B. Product name
@@ -537,7 +537,7 @@ GROUP BY 1,2,3,5
 ORDER BY 1 ASC, 2 ASC
 ```
 
-Result:
+**Result:**
 
 | category_name  |           product_name           | unit_price | average_unit_price | median_unit_price | average_unit_price_position | median_unit_price_position |
 | -------------- | -------------------------------- | ---------- | ------------------ | ----------------- | --------------------------- | -------------------------- |
@@ -613,17 +613,193 @@ Result:
 
 ### :arrow_forward: Analysis 9
 
-The Sales Team wants to build a list of KPIs to measure employees' performances. In order to help them they asked you to provide them a list of employees with:
+Measuring employees' sales performance. Table consists of:
 
-their full name (first name and last name combined in a single field)
-their job title
-their total sales amount excluding discount (formatted to have only 2 decimals)
-their total number of unique orders
-their total number of orders
-their average product amount excluding discount (formatted to have only 2 decimals). This corresponds to the average amount of product sold (without taking into account any discount applied to it).
-their average order amount excluding discount (formatted to have only 2 decimals). This corresponds to the ratio between the total amount of product sold (without taking into account any discount applied to it) against to the total number of unique orders.
-their total discount amount (formatted to have only 2 decimals)
-their total sales amount including discount (formatted to have only 2 decimals)
-Their total discount percentage (formatted to have only 2 decimals)
-Finally order the results by total sales amount including discount (descending).
+A. Full name
+B. Job title
+C. Total sales amount excluding discount 
+D. Total number of unique orders
+E. Total number of orders
+F. Average product price excluding discount
+G. Average sales amount excluding discount
+H. Total discount
+I. Total sales including discount 
+K. Total discount percentage
 
+Order result by total sales amount including discount (in descending order).
+
+<details>
+<summary>
+:chart_with_upwards_trend: Query
+</summary>
+
+```SQL
+SELECT employee_full_name,
+	   employee_title,
+	   ROUND(CAST(total_sales AS NUMERIC), 2) AS total_sales_amount_excluding_discount,
+	   number_unique_orders,
+	   number_orders,
+	   ROUND(CAST(total_sales/total_quantity AS NUMERIC), 2) AS average_product_amount,
+	   ROUND(CAST(total_sales/number_unique_orders AS NUMERIC), 2) AS average_order_amount,
+	   ROUND(CAST(total_discount_amount AS NUMERIC), 2) AS total_discount_amount,
+	   ROUND(CAST(total_sales_amount_including_discount AS NUMERIC), 2) AS total_sales_amount_including_discount,
+	   ROUND(CAST(total_discount_amount/total_sales AS NUMERIC)*100, 2) AS total_discount_percentage
+FROM (SELECT concat(first_name, ' ', last_name) AS employee_full_name,
+	  		 title AS employee_title,
+	   		 COUNT(DISTINCT od.order_id) AS number_unique_orders,
+	   		 COUNT(od.order_id) AS number_orders,
+	   		 SUM(od.quantity) AS total_quantity,
+	   		 SUM(od.unit_price*od.quantity) AS total_sales,
+	   		 SUM(od.unit_price*od.quantity*od.discount) AS total_discount_amount,
+	   		 SUM((od.unit_price*od.quantity)*(1-od.discount)) AS total_sales_amount_including_discount
+	  FROM order_details od
+	  LEFT JOIN orders o ON o.order_id = od.order_id 
+	  LEFT JOIN employees e ON e.employee_id = o.employee_id 
+	  GROUP BY 1,2) summary
+ORDER BY total_sales_amount_including_discount DESC
+```
+
+**Result:**
+
+| employee_full_name | employee_title           | total_sales_amount_excluding_discount | number_unique_orders | number_orders | average_product_amount | average_order_amount | total_discount_amount | total_sales_amount_including_discount | total_discount_percentage |
+| Margaret Peacock   | Sales Representative     | 250187.45                             | 156                  | 420           | 25.53                  | 1603.77              | 17296.6               | 232890.85                             | 6.91                      |
+| Janet Leverling    | Sales Representative     | 213051.3                              | 127                  | 321           | 27.13                  | 1677.57              | 10238.46              | 202812.84                             | 4.81                      |
+| Nancy Davolio      | Sales Representative     | 202143.71                             | 123                  | 345           | 25.88                  | 1643.44              | 10036.11              | 192107.6                              | 4.96                      |
+| Andrew Fuller      | Vice President, Sales    | 177749.26                             | 96                   | 241           | 29.36                  | 1851.55              | 11211.51              | 166537.76                             | 6.31                      |
+| Laura Callahan     | Inside Sales Coordinator | 133301.03                             | 104                  | 260           | 22.54                  | 1281.74              | 6438.75               | 126862.28                             | 4.83                      |
+| Robert King        | Sales Representative     | 141295.99                             | 72                   | 176           | 30.36                  | 1962.44              | 16727.76              | 124568.23                             | 11.84                     |
+| Anne Dodsworth     | Sales Representative     | 82964                                 | 43                   | 107           | 31.07                  | 1929.4               | 5655.93               | 77308.07                              | 6.82                      |
+| Michael Suyama     | Sales Representative     | 78198.1                               | 67                   | 168           | 22.17                  | 1167.14              | 4284.97               | 73913.13                              | 5.48                      |
+| Steven Buchanan    | Sales Manager            | 75567.75                              | 42                   | 117           | 24.89                  | 1799.23              | 6775.47               | 68792.28                              | 8.97                      |
+
+</details>
+
+### :arrow_forward: Analysis 10
+
+Measuring employees' performances across each category. Table consists of:
+
+A. Categories
+B. Full name
+C. Total sales amount including discount
+D. Proportion of their total sales amount including discount compared to their sales across all categories
+E. Proportion of their total sales amount including discount compared to total sales of the company (all employees)
+
+Order result by category name (ascending) then total sales amount (descending).
+
+<details>
+<summary>
+:chart_with_upwards_trend: Query
+</summary>
+
+```SQL
+SELECT category_name,
+	   employee_full_name,
+	   ROUND(CAST(total_sales AS NUMERIC), 2) AS total_sale_amount,
+	   ROUND(CAST(total_sales/total_sales_per_employee_all_categories AS NUMERIC), 5) AS percent_of_employee_sales,
+	   ROUND(CAST(total_sales/total_sales_all_employee_per_category AS NUMERIC), 5) AS percent_of_category_sales	   
+FROM (SELECT category_name,
+	   		 employee_full_name,
+	   	   	 total_sales,
+	   		 sum(total_sales) OVER(PARTITION BY employee_full_name) AS total_sales_per_employee_all_categories,
+	   		 sum(total_sales) OVER(PARTITION BY category_name) AS total_sales_all_employee_per_category
+	  FROM( 
+	  		SELECT category_name,
+	   			   concat(first_name, ' ', last_name) AS employee_full_name,
+	   			   sum((unit_price*quantity)*(1-discount)) AS total_sales
+			FROM(SELECT od.order_id,
+	   					od.product_id,
+					    cat.category_name,
+					    e.first_name,
+					    e.last_name,
+					    od.unit_price,
+					    od.quantity,
+					    od.discount 
+				 FROM order_details od
+				 LEFT JOIN orders o ON o.order_id = od.order_id 
+				 LEFT JOIN employees e ON e.employee_id = o.employee_id 
+				 LEFT JOIN products prod ON prod.product_id = od.product_id 
+				 LEFT JOIN categories cat ON cat.category_id = prod.category_id
+				 ) summ1
+			 GROUP BY 1, 2
+			 ) summ2
+		) summ3
+ORDER BY 1 ASC, 3 DESC 
+```
+
+**Result**
+
+| category_name  | employee_full_name | total_sale_amount | percent_of_employee_sales | percent_of_category_sales |
+| Beverages      | Margaret Peacock   | 50308.21          | 0.21602                   | 0.18781                   |
+| Beverages      | Nancy Davolio      | 46599.35          | 0.24257                   | 0.17396                   |
+| Beverages      | Janet Leverling    | 44757.4           | 0.22068                   | 0.16709                   |
+| Beverages      | Andrew Fuller      | 40248.25          | 0.24168                   | 0.15025                   |
+| Beverages      | Robert King        | 27963.83          | 0.22449                   | 0.10439                   |
+| Beverages      | Anne Dodsworth     | 19642.55          | 0.25408                   | 0.07333                   |
+| Beverages      | Laura Callahan     | 17897.85          | 0.14108                   | 0.06682                   |
+| Beverages      | Steven Buchanan    | 11000.53          | 0.15991                   | 0.04107                   |
+| Beverages      | Michael Suyama     | 9450.2            | 0.12786                   | 0.03528                   |
+| Condiments     | Margaret Peacock   | 23314.87          | 0.10011                   | 0.21985                   |
+| Condiments     | Andrew Fuller      | 14850.67          | 0.08917                   | 0.14004                   |
+| Condiments     | Laura Callahan     | 14637.66          | 0.11538                   | 0.13803                   |
+| Condiments     | Nancy Davolio      | 13561.56          | 0.07059                   | 0.12788                   |
+| Condiments     | Janet Leverling    | 13381.64          | 0.06598                   | 0.12619                   |
+| Condiments     | Anne Dodsworth     | 10125.54          | 0.13098                   | 0.09548                   |
+| Condiments     | Robert King        | 8851.37           | 0.07106                   | 0.08347                   |
+| Condiments     | Michael Suyama     | 4648.47           | 0.06289                   | 0.04383                   |
+| Condiments     | Steven Buchanan    | 2675.3            | 0.03889                   | 0.02523                   |
+| Confections    | Janet Leverling    | 33622.4           | 0.16578                   | 0.2009                    |
+| Confections    | Nancy Davolio      | 28568.92          | 0.14871                   | 0.17071                   |
+| Confections    | Margaret Peacock   | 27768.73          | 0.11923                   | 0.16592                   |
+| Confections    | Laura Callahan     | 21699.91          | 0.17105                   | 0.12966                   |
+| Confections    | Andrew Fuller      | 21455.69          | 0.12883                   | 0.1282                    |
+| Confections    | Robert King        | 14518.99          | 0.11655                   | 0.08675                   |
+| Confections    | Anne Dodsworth     | 8053.16           | 0.10417                   | 0.04812                   |
+| Confections    | Michael Suyama     | 6859.63           | 0.09281                   | 0.04099                   |
+| Confections    | Steven Buchanan    | 4809.8            | 0.06992                   | 0.02874                   |
+| Dairy Products | Nancy Davolio      | 36022.98          | 0.18751                   | 0.15361                   |
+| Dairy Products | Margaret Peacock   | 33549.8           | 0.14406                   | 0.14307                   |
+| Dairy Products | Janet Leverling    | 32320.83          | 0.15936                   | 0.13782                   |
+| Dairy Products | Robert King        | 27621.86          | 0.22174                   | 0.11779                   |
+| Dairy Products | Andrew Fuller      | 23812.55          | 0.14299                   | 0.10154                   |
+| Dairy Products | Steven Buchanan    | 21937.63          | 0.3189                    | 0.09355                   |
+| Dairy Products | Laura Callahan     | 21101.47          | 0.16633                   | 0.08998                   |
+| Dairy Products | Anne Dodsworth     | 21101.12          | 0.27295                   | 0.08998                   |
+| Dairy Products | Michael Suyama     | 17039.04          | 0.23053                   | 0.07266                   |
+| Grains/Cereals | Margaret Peacock   | 22579.61          | 0.09695                   | 0.23583                   |
+| Grains/Cereals | Janet Leverling    | 21235.01          | 0.1047                    | 0.22179                   |
+| Grains/Cereals | Andrew Fuller      | 11172.95          | 0.06709                   | 0.1167                    |
+| Grains/Cereals | Laura Callahan     | 11072.05          | 0.08728                   | 0.11564                   |
+| Grains/Cereals | Michael Suyama     | 9410.7            | 0.12732                   | 0.09829                   |
+| Grains/Cereals | Nancy Davolio      | 8465.9            | 0.04407                   | 0.08842                   |
+| Grains/Cereals | Robert King        | 6535.5            | 0.05247                   | 0.06826                   |
+| Grains/Cereals | Steven Buchanan    | 4027.56           | 0.05855                   | 0.04207                   |
+| Grains/Cereals | Anne Dodsworth     | 1245.3            | 0.01611                   | 0.01301                   |
+| Meat/Poultry   | Margaret Peacock   | 30867.14          | 0.13254                   | 0.18934                   |
+| Meat/Poultry   | Andrew Fuller      | 29873.6           | 0.17938                   | 0.18325                   |
+| Meat/Poultry   | Robert King        | 21176.72          | 0.17                      | 0.1299                    |
+| Meat/Poultry   | Janet Leverling    | 20502.62          | 0.10109                   | 0.12577                   |
+| Meat/Poultry   | Laura Callahan     | 16395.28          | 0.12924                   | 0.10057                   |
+| Meat/Poultry   | Nancy Davolio      | 15038.47          | 0.07828                   | 0.09225                   |
+| Meat/Poultry   | Steven Buchanan    | 11488.2           | 0.167                     | 0.07047                   |
+| Meat/Poultry   | Michael Suyama     | 9003.69           | 0.12181                   | 0.05523                   |
+| Meat/Poultry   | Anne Dodsworth     | 8676.66           | 0.11223                   | 0.05322                   |
+| Produce        | Nancy Davolio      | 19706.25          | 0.10258                   | 0.19709                   |
+| Produce        | Margaret Peacock   | 17186.56          | 0.0738                    | 0.17189                   |
+| Produce        | Laura Callahan     | 12016.52          | 0.09472                   | 0.12018                   |
+| Produce        | Janet Leverling    | 11960.85          | 0.05897                   | 0.11963                   |
+| Produce        | Michael Suyama     | 11560.7           | 0.15641                   | 0.11562                   |
+| Produce        | Robert King        | 10753.38          | 0.08633                   | 0.10755                   |
+| Produce        | Andrew Fuller      | 9376.48           | 0.0563                    | 0.09378                   |
+| Produce        | Steven Buchanan    | 7109.02           | 0.10334                   | 0.0711                    |
+| Produce        | Anne Dodsworth     | 314.81            | 0.00407                   | 0.00315                   |
+| Seafood        | Margaret Peacock   | 27315.93          | 0.11729                   | 0.2081                    |
+| Seafood        | Janet Leverling    | 25032.09          | 0.12342                   | 0.1907                    |
+| Seafood        | Nancy Davolio      | 24144.15          | 0.12568                   | 0.18394                   |
+| Seafood        | Andrew Fuller      | 15747.57          | 0.09456                   | 0.11997                   |
+| Seafood        | Laura Callahan     | 12041.54          | 0.09492                   | 0.09174                   |
+| Seafood        | Anne Dodsworth     | 8148.9            | 0.10541                   | 0.06208                   |
+| Seafood        | Robert King        | 7146.58           | 0.05737                   | 0.05445                   |
+| Seafood        | Michael Suyama     | 5940.7            | 0.08037                   | 0.04526                   |
+| Seafood        | Steven Buchanan    | 5744.25           | 0.0835                    | 0.04376                   |
+
+</details>
