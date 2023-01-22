@@ -32,11 +32,13 @@
 Prior to the annual review of Northwind's pricing strategy, Product team wants to look at the products currently being offered, we were asked to provide list of:
 
 A. Product name
+
 B. Product unit price
 
 With the following conditions:
 
 A. Unit price is between $10 and $50
+
 B. Products are not discontinued
 
 <details>
