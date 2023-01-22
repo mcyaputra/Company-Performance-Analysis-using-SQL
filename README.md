@@ -128,7 +128,7 @@ Order the results by average days between the order date and the shipping date i
 
 <details>
 <summary>
-Query
+:chart_with_upwards_trend: Query
 </summary>
 
 ```SQL
@@ -191,7 +191,7 @@ Order the results by employee age and employee full name in ascending order (low
 
 <details>
 <summary>
-Query
+:chart_with_upwards_trend: Query
 </summary>
 
 ```SQL
@@ -247,7 +247,7 @@ Order result by total freight in descending order
 
 <details>
 <summary>
-Query
+:chart_with_upwards_trend: Query
 </summary>
 
 ```SQL
@@ -294,7 +294,7 @@ B. Finally order the results by percentage increase (ascending order).
 
 <details>
 <summary>
-Query
+:chart_with_upwards_trend: Query
 </summary>
 
 ```SQL
