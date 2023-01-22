@@ -118,12 +118,15 @@ ORDER BY product_name ASC;
 Logistic team wants to conducts analysis of their performance in 1997, to identify which countries didn’t perform well. They asked us to provide them the list of countries with the following information:
 
 A. Average days between order date and shipping date
+
 B. Total number of unique orders (based on order id) 
 
 Filtered based on the following conditions:
  
 A. Order date is in 1997
+
 B. Average days between order date and shipping date is >= 3 days but < 20 days 
+
 C. Total number of orders is greater than 5
 
 Order the results by average days between the order date and the shipping date in descending order.
@@ -183,10 +186,15 @@ ORDER BY 2 DESC
 People Operation team wants to know the age of each employee when they first join the company and their current manager. We are tasked to provide them with a list of all employees including:
 
 A. Full name
+
 B. Job title
+
 C. Age (at the time of joining the company)
+
 D. their tenure in years until current date
+
 E. Manager's full name
+
 F. Manager's job title
 
 Order the results by employee age and employee full name in ascending order (lowest first).
@@ -236,13 +244,17 @@ ORDER BY employee_age ASC, employee_full_name ASC;
 Again, Logistics Team asked for our help to analyze their global performances from 1996 to 1997, to identify which month they perform well. We need provide them a list with:
 
 A. Year/month in a single cell in a date format
+
 B. Total number of orders
+
 C. Total freight (formatted to have no decimals)
 
 Filtered based on the following conditions:
 
 A. Order date is from 1996 to 1997
+
 B. Total number of orders greater than 20 orders
+
 C. Total freight is greater than 2500
 
 Order result by total freight in descending order
@@ -285,13 +297,17 @@ ORDER BY total_freight DESC
 Pricing Team wants to analyze which products had experienced price increases not in between 10% and 30%. We need to provide them a list of products including:
 
 A. Product name
+
 B. Current unit price
+
 C. Initial/Previous unit price
+
 D. Percentage increase
 
 Filtered based on the following conditions:
 
 A. Percentage increase is not between 10% and 30%
+
 B. Finally order the results by percentage increase (ascending order).
 
 <details>
@@ -319,7 +335,8 @@ ORDER BY percentage_increase ASC
 
 **Result:**
 
-| product_name                  | current_price | previous_unit_price | percentage_increase |
+|         product_name          | current_price | previous_unit_price | percentage_increase |
+| ----------------------------- | ------------- | ------------------- | ------------------- |
 | Singaporean Hokkien Fried Mee | 14.00         | 9.80                | 42.8571             |
 | Queso Cabrales                | 21.00         | 14.00               | 50.0000             |
 
@@ -331,13 +348,19 @@ ORDER BY percentage_increase ASC
 Pricing Team asks us to help analyze the performance of each product category based on price range. We need to provide them with:
 
 A. Category name
+
 B. Price range as: 
+
 “Below $10”
+
 “$10 - $20”
+
 “$20 - $50”
+
 “Over $50”
 
 C. Total amount taking into account discount (i.e. subtracting the discounted amount)
+
 D. Volume of orders (number of orders per category)
 
 Order result by category name then price range (ascending order).
@@ -414,13 +437,21 @@ ORDER BY category_name ASC, price_range ASC
 Analyzing the current stock level of the company's regional suppliers for each product category, table consists of:
 
 A. Category name
+
 B. Supplier region” as: 
+
 -America
+
 -Europe
+
 -Asia
+
 -Oceania
+
 C. Total units in stock
+
 D. Total units on order
+
 E. Total reorder level
 
 Order result by supplier region, then category name and reorder level (in ascending order).
@@ -484,17 +515,29 @@ ORDER BY supplier_region ASC, category_name ASC, reorder_level ASC
 Comparing current product pricing to their respective categories average and median unit price. Table consists of:
 
 A. Category name
+
 B. Product name
+
 C. Unit price
+
 D. Category average unit price (formatted to have only 2 decimals)
+
 E. Category median unit price (formatted to have only 2 decimals)
+
 F. Current price compared to category average unit price as:
+
 “Below Average”
+
 “Average”
+
 “Over Average”
+
 G. Current price compared to category median unit price as:
+
 “Below Median”
+
 “Median”
+
 “Over Median”
 
 Filtered based on the following conditions:
@@ -618,14 +661,23 @@ ORDER BY 1 ASC, 2 ASC
 Measuring employees' sales performance. Table consists of:
 
 A. Full name
+
 B. Job title
+
 C. Total sales amount excluding discount 
+
 D. Total number of unique orders
+
 E. Total number of orders
+
 F. Average product price excluding discount
+
 G. Average sales amount excluding discount
+
 H. Total discount
+
 I. Total sales including discount 
+
 K. Total discount percentage
 
 Order result by total sales amount including discount (in descending order).
@@ -681,9 +733,13 @@ ORDER BY total_sales_amount_including_discount DESC
 Measuring employees' performances across each category. Table consists of:
 
 A. Categories
+
 B. Full name
+
 C. Total sales amount including discount
+
 D. Proportion of their total sales amount including discount compared to their sales across all categories
+
 E. Proportion of their total sales amount including discount compared to total sales of the company (all employees)
 
 Order result by category name (ascending) then total sales amount (descending).
