@@ -148,6 +148,8 @@ WHERE average_days_between_order_shipping >= 3 AND average_days_between_order_sh
 AND total_volume_orders > 5
 ORDER BY 2 DESC
 
+Result:
+
 | shipping_country | average_days_between_order_shipping | total_volume_orders |
 | ---------------- | ----------------------------------- | ------------------- |
 | Portugal         | 12.00                               | 7                   |
@@ -169,7 +171,7 @@ ORDER BY 2 DESC
 | Argentina        | 5.67                                | 6                   |
 | Finland          | 5.54                                | 13                  |
 
-
+</details>
 
 3. People Operation team wants to know the age of each employee when they first join the company and their current manager. We are tasked to provide them with a list of all employees including:
 
@@ -186,6 +188,42 @@ Order the results by employee age and employee full name in ascending order (low
 <summary>
 Query
 </summary>
+
+```SQL
+WITH new_table AS (SELECT 
+		CONCAT(first_name, ' ', last_name) AS employee_full_name,
+		title AS employee_title,
+		EXTRACT(YEAR FROM AGE(hire_date, birth_date)) AS employee_age,
+		EXTRACT(YEAR FROM AGE(CURRENT_DATE, hire_date)) AS employee_tenure,
+		reports_to
+FROM employees e)
+
+SELECT  employee_full_name,
+		employee_title,
+		employee_age,
+		employee_tenure,
+		concat(e.first_name,' ', e.last_name) AS manager_full_name,
+		e.title AS manager_title
+FROM new_table n
+LEFT JOIN employees e ON e.employee_id = n.reports_to
+ORDER BY employee_age ASC, employee_full_name ASC;
+```
+
+Result:
+
+| employee_full_name |      employee_title      | employee_age | employee_tenure | manager_full_name |     manager_title     |
+| ------------------ | ------------------------ | ------------ | --------------- | ----------------- | --------------------- |
+| Anne Dodsworth     | Sales Representative     | 28           | 27              | Steven Buchanan   | Sales Manager         |
+| Janet Leverling    | Sales Representative     | 28           | 30              | Andrew Fuller     | Vice President, Sales |
+| Michael Suyama     | Sales Representative     | 30           | 28              | Steven Buchanan   | Sales Manager         |
+| Robert King        | Sales Representative     | 33           | 28              | Steven Buchanan   | Sales Manager         |
+| Laura Callahan     | Inside Sales Coordinator | 36           | 28              | Andrew Fuller     | Vice President, Sales |
+| Steven Buchanan    | Sales Manager            | 38           | 28              | Andrew Fuller     | Vice President, Sales |
+| Andrew Fuller      | Vice President, Sales    | 40           | 30              |                   |                       |
+| Nancy Davolio      | Sales Representative     | 43           | 30              | Andrew Fuller     | Vice President, Sales |
+| Margaret Peacock   | Sales Representative     | 55           | 29              | Andrew Fuller     | Vice President, Sales |
+
+</details>
 
 4. Again, Logistics Team asked for our help to analyze their global performances from 1996 to 1997, to identify which month they perform well. We need provide them a list with:
 
@@ -206,6 +244,35 @@ Order result by total freight in descending order
 Query
 </summary>
 
+```SQL
+SELECT CAST(year_month AS date),
+	   total_number_orders,
+	   total_freight 
+FROM (SELECT to_char(date_trunc('month', order_date), 'YYYY-MM-DD') AS year_month,
+	  		 count(order_id) AS total_number_orders,
+	   		 round(CAST(sum(freight) AS NUMERIC), 0) AS total_freight
+	  FROM orders
+	  GROUP BY 1) cte
+WHERE year_month BETWEEN '1996' AND '1998'
+AND total_number_orders > 20
+AND total_freight > 2500
+ORDER BY total_freight DESC
+```
+
+Result:
+
+| year_month | total_number_orders | total_freight |
+| ---------- | ------------------- | ------------- |
+| 1997-10-01 | 38                  | 3946          |
+| 1997-12-01 | 48                  | 3758          |
+| 1997-05-01 | 32                  | 3461          |
+| 1997-09-01 | 37                  | 3237          |
+| 1997-08-01 | 33                  | 3078          |
+| 1997-04-01 | 31                  | 2939          |
+| 1996-12-01 | 31                  | 2799          |
+
+</details>
+
 5. Pricing Team wants to analyze which products had experienced price increases not in between 10% and 30%. We need to provide them a list of products including:
 
 A. Product name
@@ -222,3 +289,31 @@ B. Finally order the results by percentage increase (ascending order).
 <summary>
 Query
 </summary>
+
+```SQL
+SELECT product_name,
+	   ROUND(CAST(current_price AS NUMERIC), 2) AS current_price ,
+	   ROUND(CAST(previous_unit_price AS NUMERIC), 2) AS previous_unit_price ,
+	   ROUND(CAST(((current_price/previous_unit_price)-1)*100 AS NUMERIC), 4) AS percentage_increase
+FROM (
+		SELECT product_name,
+	    	   max(od.order_id) AS latest_order_id,
+	    	   max(od.unit_price) AS current_price,
+	    	   min(od.order_id) AS oldest_order_id,
+	 		   min(od.unit_price) AS previous_unit_price	
+		FROM products prod
+		LEFT JOIN order_details od ON od.product_id = prod.product_id 
+		GROUP BY product_name) list
+WHERE ROUND(CAST(((current_price/previous_unit_price)-1)*100 AS numeric), 4) NOT BETWEEN 10 AND 30
+ORDER BY percentage_increase ASC
+```
+
+Result:
+
+```SQL
+| product_name                  | current_price | previous_unit_price | percentage_increase |
+| Singaporean Hokkien Fried Mee | 14.00         | 9.80                | 42.8571             |
+| Queso Cabrales                | 21.00         | 14.00               | 50.0000             |
+```
+
+</details>
