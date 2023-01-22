@@ -38,7 +38,6 @@ A. Unit price is between $10 and $50
 B. Products are not discontinued
 
 <summary>
-<details>
 Query
 </summary>
 
