@@ -37,8 +37,8 @@ With the following conditions:
 A. Unit price is between $10 and $50
 B. Products are not discontinued
 
-<details>
 <summary>
+<details>
 Query
 </summary>
 
@@ -50,6 +50,8 @@ WHERE unit_price BETWEEN 10 AND 50
 AND discontinued = 0
 ORDER BY product_name ASC;
 ```
+
+Result:
 
 |           product_name           | unit_price |
 | -------------------------------- | ---------- |
