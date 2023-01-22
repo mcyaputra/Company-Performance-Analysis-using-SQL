@@ -42,6 +42,72 @@ B. Products are not discontinued
 Query
 </summary>
 
+```SQL
+SELECT product_name,
+	   unit_price
+FROM products p 
+WHERE unit_price BETWEEN 10 AND 50 
+AND discontinued = 0
+ORDER BY product_name ASC;
+```
+
+|           product_name           | unit_price |
+| -------------------------------- | ---------- |
+| Aniseed Syrup                    | 10.0       |
+| Boston Crab Meat                 | 18.4       |
+| Camembert Pierrot                | 34.0       |
+| Chartreuse verte                 | 18.0       |
+| Chef Anton's Cajun Seasoning     | 22.0       |
+| Chocolade                        | 12.75      |
+| Escargots de Bourgogne           | 13.25      |
+| Flotemysost                      | 21.5       |
+| Genen Shouyu                     | 13.0       |
+| Gnocchi di nonna Alice           | 38.0       |
+| Gorgonzola Telino                | 12.5       |
+| Grandma's Boysenberry Spread     | 25.0       |
+| Gravad lax                       | 26.0       |
+| Gudbrandsdalsost                 | 36.0       |
+| Gula Malacca                     | 19.45      |
+| Gumbär Gummibärchen              | 31.23      |
+| Gustaf's Knäckebröd              | 21.0       |
+| Ikura                            | 31.0       |
+| Inlagd Sill                      | 19.0       |
+| Ipoh Coffee                      | 46.0       |
+| Lakkalikööri                     | 18.0       |
+| Laughing Lumberjack Lager        | 14.0       |
+| Longlife Tofu                    | 10.0       |
+| Louisiana Fiery Hot Pepper Sauce | 21.05      |
+| Louisiana Hot Spiced Okra        | 17.0       |
+| Mascarpone Fabioli               | 32.0       |
+| Maxilaku                         | 20.0       |
+| Mozzarella di Giovanni           | 34.8       |
+| Nord-Ost Matjeshering            | 25.89      |
+| Northwoods Cranberry Sauce       | 40.0       |
+| NuNuCa Nuß-Nougat-Creme          | 14.0       |
+| Original Frankfurter grüne Soße  | 13.0       |
+| Outback Lager                    | 15.0       |
+| Pavlova                          | 17.45      |
+| Pâté chinois                     | 24.0       |
+| Queso Cabrales                   | 21.0       |
+| Queso Manchego La Pastora        | 38.0       |
+| Ravioli Angelo                   | 19.5       |
+| Röd Kaviar                       | 15.0       |
+| Sasquatch Ale                    | 14.0       |
+| Schoggi Schokolade               | 43.9       |
+| Scottish Longbreads              | 12.5       |
+| Sir Rodney's Scones              | 10.0       |
+| Sirop d'érable                   | 28.5       |
+| Spegesild                        | 12.0       |
+| Steeleye Stout                   | 18.0       |
+| Tarte au sucre                   | 49.3       |
+| Tofu                             | 23.25      |
+| Uncle Bob's Organic Dried Pears  | 30.0       |
+| Valkoinen suklaa                 | 16.25      |
+| Vegie-spread                     | 43.9       |
+| Wimmers gute Semmelknödel        | 33.25      |
+
+</details>
+
 2. Logistic team wants to conducts analysis of their performance in 1997, to identify which countries didn’t perform well. They asked us to provide them the list of countries with the following information:
 
 A. Average days between order date and shipping date
