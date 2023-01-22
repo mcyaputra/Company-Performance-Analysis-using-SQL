@@ -28,7 +28,7 @@
 
 ## Analysis (Role playing as an analyst in the company)
 
-### :one: Analysis 1
+### :arrow_forward: Analysis 1
 Prior to the annual review of Northwind's pricing strategy, Product team wants to look at the products currently being offered, we were asked to provide list of:
 
 A. Product name
@@ -112,7 +112,7 @@ Result:
 
 </details>
 
-### :two: Analysis 2
+### :arrow_forward: Analysis 2
 Logistic team wants to conducts analysis of their performance in 1997, to identify which countries didn’t perform well. They asked us to provide them the list of countries with the following information:
 
 A. Average days between order date and shipping date
@@ -150,6 +150,7 @@ FROM (SELECT shipping_country,
 WHERE average_days_between_order_shipping >= 3 AND average_days_between_order_shipping < 20
 AND total_volume_orders > 5
 ORDER BY 2 DESC
+```
 
 Result:
 
@@ -176,7 +177,7 @@ Result:
 
 </details>
 
-### :three: Analysis 3
+### :arrow_forward: Analysis 3
 People Operation team wants to know the age of each employee when they first join the company and their current manager. We are tasked to provide them with a list of all employees including:
 
 A. Full name
@@ -229,7 +230,7 @@ Result:
 
 </details>
 
-### :four: Analysis 4
+### :arrow_forward: Analysis 4
 Again, Logistics Team asked for our help to analyze their global performances from 1996 to 1997, to identify which month they perform well. We need provide them a list with:
 
 A. Year/month in a single cell in a date format
@@ -278,7 +279,7 @@ Result:
 
 </details>
 
-### :five: Analysis 5
+### :arrow_forward: Analysis 5
 Pricing Team wants to analyze which products had experienced price increases not in between 10% and 30%. We need to provide them a list of products including:
 
 A. Product name
