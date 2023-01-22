@@ -37,6 +37,7 @@ With the following conditions:
 A. Unit price is between $10 and $50
 B. Products are not discontinued
 
+<details>
 <summary>
 Query
 </summary>
@@ -126,6 +127,49 @@ Order the results by average days between the order date and the shipping date i
 <summary>
 Query
 </summary>
+
+```SQL
+WITH order_list AS(SELECT ship_country AS shipping_country,
+	   shipped_date - order_date AS days,
+	   COUNT(order_id) OVER(PARTITION BY order_id) AS total_volume_orders
+	   FROM orders o 
+	   WHERE EXTRACT(YEAR from(order_date)) = 1997
+	   GROUP BY days, ship_country,order_id
+	   ORDER BY ship_country ASC)
+
+
+SELECT *
+FROM (SELECT shipping_country,
+	   round(AVG(days), 2) AS average_days_between_order_shipping,
+	   count(total_volume_orders) AS total_volume_orders
+	   FROM order_list
+	   GROUP BY shipping_country, total_volume_orders) new_list
+WHERE average_days_between_order_shipping >= 3 AND average_days_between_order_shipping < 20
+AND total_volume_orders > 5
+ORDER BY 2 DESC
+
+| shipping_country | average_days_between_order_shipping | total_volume_orders |
+| ---------------- | ----------------------------------- | ------------------- |
+| Portugal         | 12.00                               | 7                   |
+| USA              | 10.98                               | 60                  |
+| Austria          | 10.67                               | 21                  |
+| UK               | 10.47                               | 30                  |
+| Germany          | 9.56                                | 64                  |
+| Ireland          | 9.10                                | 10                  |
+| Brazil           | 8.95                                | 42                  |
+| Venezuela        | 8.75                                | 20                  |
+| Italy            | 8.13                                | 15                  |
+| Mexico           | 8.08                                | 12                  |
+| Denmark          | 7.91                                | 11                  |
+| Belgium          | 7.29                                | 7                   |
+| France           | 7.26                                | 39                  |
+| Sweden           | 6.65                                | 17                  |
+| Switzerland      | 6.63                                | 8                   |
+| Canada           | 6.41                                | 17                  |
+| Argentina        | 5.67                                | 6                   |
+| Finland          | 5.54                                | 13                  |
+
+
 
 3. People Operation team wants to know the age of each employee when they first join the company and their current manager. We are tasked to provide them with a list of all employees including:
 
