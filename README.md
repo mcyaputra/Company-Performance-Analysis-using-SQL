@@ -41,7 +41,7 @@ B. Products are not discontinued
 
 <details>
 <summary>
-:chart_with_upwards_trend: Query
+:chart_with_upwards_trend: **Query**
 </summary>
 
 ```SQL
@@ -53,7 +53,7 @@ AND discontinued = 0
 ORDER BY product_name ASC;
 ```
 
-Result:
+**Result:**
 
 |           product_name           | unit_price |
 | -------------------------------- | ---------- |
@@ -536,6 +536,8 @@ WHERE discontinued = 0
 GROUP BY 1,2,3,5
 ORDER BY 1 ASC, 2 ASC
 ```
+
+Result:
 
 | category_name  |           product_name           | unit_price | average_unit_price | median_unit_price | average_unit_price_position | median_unit_price_position |
 | -------------- | -------------------------------- | ---------- | ------------------ | ----------------- | --------------------------- | -------------------------- |
