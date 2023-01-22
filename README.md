@@ -28,7 +28,7 @@
 
 ## Analysis (Role playing as an analyst in the company)
 
-### **Analysis 1**
+### :arrow_forward: Analysis 1
 Prior to the annual review of Northwind's pricing strategy, Product team wants to look at the products currently being offered, we were asked to provide list of:
 
 A. Product name
