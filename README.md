@@ -27,7 +27,9 @@
 
 
 ## Analysis (Role playing as an analyst in the company)
-1. Prior to the annual review of Northwind's pricing strategy, Product team wants to look at the products currently being offered, we were asked to provide list of:
+
+### Analysis 1
+Prior to the annual review of Northwind's pricing strategy, Product team wants to look at the products currently being offered, we were asked to provide list of:
 
 A. Product name
 B. Product unit price
@@ -110,7 +112,8 @@ Result:
 
 </details>
 
-2. Logistic team wants to conducts analysis of their performance in 1997, to identify which countries didn’t perform well. They asked us to provide them the list of countries with the following information:
+### Analysis 2
+Logistic team wants to conducts analysis of their performance in 1997, to identify which countries didn’t perform well. They asked us to provide them the list of countries with the following information:
 
 A. Average days between order date and shipping date
 B. Total number of unique orders (based on order id) 
@@ -173,7 +176,8 @@ Result:
 
 </details>
 
-3. People Operation team wants to know the age of each employee when they first join the company and their current manager. We are tasked to provide them with a list of all employees including:
+### Analysis 3
+People Operation team wants to know the age of each employee when they first join the company and their current manager. We are tasked to provide them with a list of all employees including:
 
 A. Full name
 B. Job title
@@ -225,7 +229,8 @@ Result:
 
 </details>
 
-4. Again, Logistics Team asked for our help to analyze their global performances from 1996 to 1997, to identify which month they perform well. We need provide them a list with:
+### Analysis 4
+Again, Logistics Team asked for our help to analyze their global performances from 1996 to 1997, to identify which month they perform well. We need provide them a list with:
 
 A. Year/month in a single cell in a date format
 B. Total number of orders
@@ -273,7 +278,8 @@ Result:
 
 </details>
 
-5. Pricing Team wants to analyze which products had experienced price increases not in between 10% and 30%. We need to provide them a list of products including:
+### Analysis 5
+Pricing Team wants to analyze which products had experienced price increases not in between 10% and 30%. We need to provide them a list of products including:
 
 A. Product name
 B. Current unit price
