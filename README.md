@@ -41,7 +41,7 @@ B. Products are not discontinued
 
 <details>
 <summary>
-:chart_with_upwards_trend: **Query**
+**:chart_with_upwards_trend: Query**
 </summary>
 
 ```SQL
