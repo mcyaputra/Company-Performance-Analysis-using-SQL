@@ -19,8 +19,6 @@
 | 11  | territories          | 53        | list of territory IDs, region IDs and their description                                                                  |
 | 12  | usstates             | 51        | list of US states, assigned IDs, state abbreviation and region                                                           |
 
-## Table of Content
-
 ## Relationship Diagram:
 <p align="center">
     <img width=60% height=60%" src="/Images/Relationship_Diagram.png">
