@@ -4,6 +4,8 @@
 
 >Hi everyone! In this opportunity, we will use SQL to query and analyze Northwind Traders, a fictional trading company of specialty food from around the world. Feel free to download the dataset and follow along to practice your SQL skill! We will be performing analysis on the company's performance utilizing their sales [datasets](/Northwind_Dataset.sql).
 
+Dataset summary:
+
 | No  |      Table_Name      | # of Rows |                                                       Description                                                        |
 | --- | -------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
 | 1   | Categories           | 8         | List of Category ID and names along with detailed description                                                            |
