@@ -2,7 +2,9 @@
 
 # Company Analysis (Northwind)
 
->Hi everyone! In this opportunity, we will use SQL to query and analyze Northwind Traders, a fictional trading company of specialty food from around the world. Feel free to download the dataset and follow along to practice your SQL skill! We will be performing analysis on the company's performance utilizing their sales [datasets](/Northwind_Dataset.sql).
+>Hi everyone! In this opportunity, we will use SQL to query and analyze Northwind Traders, a fictional trading company of specialty food from around the world. We will be performing analysis on the company's performance utilizing their sales [datasets](/Northwind_Dataset.sql).
+
+I will be using Postgres to run the SQL query, feel free to download the dataset and follow along to practice your SQL skill :) 
 
 Dataset summary:
 
