@@ -4,7 +4,7 @@
 
 >Hi everyone!
 
-In this exercise, we will use SQL to query and analyze Northwind Traders, a fictional trading company of specialty food from around the world. We will be performing analysis on the company's performance utilizing their sales [datasets](/Northwind_Dataset.sql).
+>In this exercise, we will use SQL to query and analyze Northwind Traders, a fictional trading company of specialty food from around the world. We will be performing analysis on the company's performance utilizing their sales [datasets](/Northwind_Dataset.sql).
 
 | No  |      Table_Name      | # of Rows |                                                       Description                                                        |
 | --- | -------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
