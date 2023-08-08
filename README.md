@@ -1,10 +1,10 @@
 
 
-# Company Analysis (Northwind)
+# 📊 Company Analysis (Northwind)
 
 >Hi everyone! In this opportunity, we will use SQL to query and analyze Northwind Traders, a fictional trading company of specialty food from around the world. We will be performing analysis on the company's performance utilizing their sales [datasets](/Northwind_Dataset.sql).
 
-I will be using Postgres to run the SQL query, feel free to download the dataset and follow along to practice your SQL skill :) 
+I will be using Postgres to run the SQL query, feel free to download the dataset and follow along :)
 
 Dataset summary:
 
@@ -23,12 +23,12 @@ Dataset summary:
 | 11  | territories          | 53        | list of territory IDs, region IDs and their description                                                                  |
 | 12  | usstates             | 51        | list of US states, assigned IDs, state abbreviation and region                                                           |
 
-## Relationship Diagram:
+## 🔗 Relationship Diagram:
 <p align="center">
     <img width=60% height=60%" src="/Images/Relationship_Diagram.png">
 
 
-## Analysis (Role playing as an analyst in the company)
+## 👨‍💻 Analysis (Role playing as an analyst in the company)
 
 ### :arrow_forward: Analysis 1
 Prior to the annual review of Northwind's pricing strategy, Product team wants to look at the products currently being offered, we were asked to provide list of:
@@ -863,3 +863,17 @@ ORDER BY 1 ASC, 3 DESC
 | Seafood        | Steven Buchanan    | 5744.25           | 0.0835                    | 0.04376                   |
 
 </details>
+
+## 👨 Feedback/Ideas? Lets connect!
+
+I would love to hear feedbacks or ideas from you! Or just simply connect and chat, feel free to contact me on:
+
+<a href="https://www.linkedin.com/in/michaelyaputra/">
+    <img align="left" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg"/>
+
+</a>
+
+<a href="https://github.com/mcyaputra">
+    <img align="left" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/github.svg" />
+
+</a>
